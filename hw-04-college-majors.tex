@@ -1,0 +1,596 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={HW 04 - What should I major in?},
+  pdfauthor={Your Name},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{HW 04 - What should I major in?}
+\author{Your Name}
+\date{}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{img/graduate} \caption{Photo by Marleena Garris on Unsplash}\label{fig:photo}
+\end{figure}
+
+The first step in the process of turning information into knowledge
+process is to summarize and describe the raw information - the data. In
+this assignment we explore data on college majors and earnings,
+specifically the data begin the FiveThirtyEight story
+\href{https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/}{``The
+Economic Guide To Picking A College Major''}.
+
+These data originally come from the American Community Survey (ACS)
+2010-2012 Public Use Microdata Series. While this is outside the scope
+of this assignment, if you are curious about how raw data from the ACS
+were cleaned and prepared, see
+\href{https://github.com/fivethirtyeight/data/blob/master/college-majors/college-majors-rscript.R}{the
+code} FiveThirtyEight authors used.
+
+We should also note that there are many considerations that go into
+picking a major. Earnings potential and employment prospects are two of
+them, and they are important, but they don't tell the whole story. Keep
+this in mind as you analyze the data.
+
+\section{Getting started}\label{getting-started}
+
+Go to the course GitHub organization and locate your homework repo,
+which should be named \texttt{hw-04-YOUR\_GITHUB\_USERNAME}. Grab the
+URL of the repo, and clone it in RStudio. First, open the R Markdown
+document \texttt{hw-04.Rmd} and Knit it. Make sure it compiles without
+errors. The output will be in the file markdown \texttt{.md} file with
+the same name.
+
+\subsection{Warm up}\label{warm-up}
+
+Before we introduce the data, let's warm up with some simple exercises.
+
+\begin{itemize}
+\tightlist
+\item
+  Update the YAML, changing the author name to your name, and
+  \textbf{knit} the document.
+\item
+  Commit your changes with a meaningful commit message.
+\item
+  Push your changes to GitHub.
+\item
+  Go to your repo on GitHub and confirm that your changes are visible in
+  your Rmd \textbf{and} md files. If anything is missing, commit and
+  push again.
+\end{itemize}
+
+\subsection{Packages}\label{packages}
+
+We'll use the \textbf{tidyverse} package for much of the data wrangling
+and visualisation, the \textbf{scales} package for better formatting of
+labels on visualisations, and the data lives in the
+\textbf{fivethirtyeight} package. These packages are already installed
+for you. You can load them by running the following in your Console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(scales)}
+\FunctionTok{library}\NormalTok{(fivethirtyeight)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Data}\label{data}
+
+The data can be found in the \textbf{fivethirtyeight} package, and it's
+called \texttt{college\_recent\_grads}. Since the dataset is distributed
+with the package, we don't need to load it separately; it becomes
+available to us when we load the package. You can find out more about
+the dataset by inspecting its documentation, which you can access by
+running \texttt{?college\_recent\_grads} in the Console or using the
+Help menu in RStudio to search for \texttt{college\_recent\_grads}. You
+can also find this information
+\href{https://fivethirtyeight-r.netlify.app/reference/college_recent_grads.html}{here}.
+
+You can also take a quick peek at your data frame and view its
+dimensions with the \texttt{glimpse} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glimpse}\NormalTok{(college\_recent\_grads)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{college\_recent\_grads} data frame is a trove of
+information. Let's think about some questions we might want to answer
+with these data:
+
+\begin{itemize}
+\tightlist
+\item
+  Which major has the lowest unemployment rate?
+\item
+  Which major has the highest percentage of women?
+\item
+  How do the distributions of median income compare across major
+  categories?
+\item
+  Do women tend to choose majors with lower or higher earnings?
+\end{itemize}
+
+In the next section we aim to answer these questions.
+
+\section{Exercises}\label{exercises}
+
+\subsection{Which major has the lowest unemployment
+rate?}\label{which-major-has-the-lowest-unemployment-rate}
+
+In order to answer this question all we need to do is sort the data. We
+use the \texttt{arrange} function to do this, and sort it by the
+\texttt{unemployment\_rate} variable. By default \texttt{arrange} sorts
+in ascending order, which is what we want here -- we're interested in
+the major with the \emph{lowest} unemployment rate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(unemployment\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+This gives us what we wanted, but not in an ideal form. First, the name
+of the major barely fits on the page. Second, some of the variables are
+not that useful (e.g.~\texttt{major\_code}, \texttt{major\_category})
+and some we might want front and center are not easily viewed
+(e.g.~\texttt{unemployment\_rate}).
+
+We can use the \texttt{select} function to choose which variables to
+display, and in which order:
+
+\begin{marginfigure}
+Note how easily we expanded our code with adding another step to our
+pipeline, with the pipe operator: \texttt{\%\textgreater{}\%}.
+\end{marginfigure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(unemployment\_rate) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(rank, major, unemployment\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+Ok, this is looking better, but do we really need to display all those
+decimal places in the unemployment variable? Not really!
+
+We can use the \texttt{percent()} function to clean up the display a
+bit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(unemployment\_rate) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(rank, major, unemployment\_rate) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{unemployment\_rate =} \FunctionTok{percent}\NormalTok{(unemployment\_rate))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Which major has the highest percentage of
+women?}\label{which-major-has-the-highest-percentage-of-women}
+
+To answer such a question we need to arrange the data in descending
+order. For example, if earlier we were interested in the major with the
+highest unemployment rate, we would use the following:
+
+\begin{marginfigure}
+The \texttt{desc} function specifies that we want
+\texttt{unemployment\_rate} in descending order.
+\end{marginfigure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(unemployment\_rate)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(rank, major, unemployment\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using what you've learned so far, arrange the data in descending order
+  with respect to proportion of women in a major, and display only the
+  major, the total number of people with major, and proportion of women.
+  Show only the top 3 majors by adding \texttt{top\_n(3)} at the end of
+  the pipeline.
+\end{enumerate}
+
+\subsection{How do the distributions of median income compare across
+major
+categories?}\label{how-do-the-distributions-of-median-income-compare-across-major-categories}
+
+\begin{marginfigure}
+A percentile is a measure used in statistics indicating the value below
+which a given percentage of observations in a group of observations
+fall. For example, the 20th percentile is the value below which 20\% of
+the observations may be found. (Source:
+\href{https://en.wikipedia.org/wiki/Percentile}{Wikipedia})
+\end{marginfigure}
+
+There are three types of incomes reported in this data frame:
+\texttt{p25th}, \texttt{median}, and \texttt{p75th}. These correspond to
+the 25th, 50th, and 75th percentiles of the income distribution of
+sampled individuals for a given major.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Why do we often choose the median, rather than the mean, to describe
+  the typical income of a group of people?
+\end{enumerate}
+
+The question we want to answer ``How do the distributions of median
+income compare across major categories?''. We need to do a few things to
+answer this question: First, we need to group the data by
+\texttt{major\_category}. Then, we need a way to summarize the
+distributions of median income within these groups. This decision will
+depend on the shapes of these distributions. So first, we need to
+visualize the data.
+
+We use the \texttt{ggplot()} function to do this. The first argument is
+the data frame, and the next argument gives the mapping of the variables
+of the data to the \texttt{aes}thetic elements of the plot.
+
+Let's start simple and take a look at the distribution of all median
+incomes, without considering the major categories.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ college\_recent\_grads, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ median)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Along with the plot, we get a message:
+
+\begin{verbatim}
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+This is telling us that we might want to reconsider the binwidth we
+chose for our histogram -- or more accurately, the binwidth we didn't
+specify. It's good practice to always think in the context of the data
+and try out a few binwidths before settling on a binwidth. You might ask
+yourself: ``What would be a meaningful difference in median incomes?''
+\$1 is obviously too little, \$10000 might be too high.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Try binwidths of \$1000 and \$5000 and choose one. Explain your
+  reasoning for your choice. Note that the binwidth is an argument for
+  the \texttt{geom\_histogram} function. So to specify a binwidth of
+  \$1000, you would use \texttt{geom\_histogram(binwidth\ =\ 1000)}.
+\end{enumerate}
+
+We can also calculate summary statistics for this distribution using the
+\texttt{summarise} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{min =} \FunctionTok{min}\NormalTok{(median), }\AttributeTok{max =} \FunctionTok{max}\NormalTok{(median),}
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(median), }\AttributeTok{med =} \FunctionTok{median}\NormalTok{(median),}
+            \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(median), }
+            \AttributeTok{q1 =} \FunctionTok{quantile}\NormalTok{(median, }\AttributeTok{probs =} \FloatTok{0.25}\NormalTok{),}
+            \AttributeTok{q3 =} \FunctionTok{quantile}\NormalTok{(median, }\AttributeTok{probs =} \FloatTok{0.75}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Based on the shape of the histogram you created in the previous
+  exercise, determine which of these summary statistics is useful for
+  describing the distribution. Write up your description (remember
+  shape, center, spread, any unusual observations) and include the
+  summary statistic output as well.
+\item
+  Plot the distribution of \texttt{median} income using a histogram,
+  faceted by \texttt{major\_category}. Use the \texttt{binwidth} you
+  chose in the earlier exercise.
+\end{enumerate}
+
+Now that we've seen the shapes of the distributions of median incomes
+for each major category, we should have a better idea for which summary
+statistic to use to quantify the typical median income.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Which major category has the highest typical (you'll need to decide
+  what this means) median income? Use the partial code below, filling it
+  in with the appropriate statistic and function. Also note that we are
+  looking for the highest statistic, so make sure to arrange in the
+  correct direction.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(major\_category) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{\_\_\_ =} \FunctionTok{\_\_\_}\NormalTok{(median)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(\_\_\_)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Which major category is the least popular in this sample? To answer
+  this question we use a new function called \texttt{count}, which first
+  groups the data and then counts the number of observations in each
+  category (see below). Add to the pipeline appropriately to arrange the
+  results so that the major with the lowest observations is on top.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(major\_category)}
+\end{Highlighting}
+\end{Shaded}
+
+🧶 ✅ ⬆️ Knit, \emph{commit, and push your changes to GitHub with an
+appropriate commit message. Make sure to commit and push all changed
+files so that your Git pane is cleared up afterwards.}
+
+\subsection{All STEM fields aren't the
+same}\label{all-stem-fields-arent-the-same}
+
+One of the sections of the
+\href{https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/}{FiveThirtyEight
+story} is ``All STEM fields aren't the same''. Let's see if this is
+true.
+
+First, let's create a new vector called \texttt{stem\_categories} that
+lists the major categories that are considered STEM fields.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stem\_categories }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Biology \& Life Science"}\NormalTok{,}
+                     \StringTok{"Computers \& Mathematics"}\NormalTok{,}
+                     \StringTok{"Engineering"}\NormalTok{,}
+                     \StringTok{"Physical Sciences"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then, we can use this to create a new variable in our data frame
+indicating whether a major is STEM or not.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\OtherTok{\textless{}{-}}\NormalTok{ college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{major\_type =} \FunctionTok{ifelse}\NormalTok{(major\_category }\SpecialCharTok{\%in\%}\NormalTok{ stem\_categories, }\StringTok{"stem"}\NormalTok{, }\StringTok{"not stem"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Let's unpack this: with \texttt{mutate} we create a new variable called
+\texttt{major\_type}, which is defined as \texttt{"stem"} if the
+\texttt{major\_category} is in the vector called
+\texttt{stem\_categories} we created earlier, and as
+\texttt{"not\ stem"} otherwise.
+
+\texttt{\%in\%} is a \textbf{logical operator}. Other logical operators
+that are commonly used are
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Operator & Operation \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{x\ \textless{}\ y} & less than \\
+\texttt{x\ \textgreater{}\ y} & greater than \\
+\texttt{x\ \textless{}=\ y} & less than or equal to \\
+\texttt{x\ \textgreater{}=\ y} & greater than or equal to \\
+\texttt{x\ !=\ y} & not equal to \\
+\texttt{x\ ==\ y} & equal to \\
+\texttt{x\ \%in\%\ y} & contains \\
+x \textbar{} y & or \\
+\texttt{x\ \&\ y} & and \\
+\texttt{!x} & not \\
+\end{longtable}
+
+We can use the logical operators to also \texttt{filter} our data for
+STEM majors whose median earnings is less than median for all majors'
+median earnings, which we found to be \$36,000 earlier.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{college\_recent\_grads }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}
+\NormalTok{    major\_type }\SpecialCharTok{==} \StringTok{"stem"}\NormalTok{,}
+\NormalTok{    median }\SpecialCharTok{\textless{}} \DecValTok{36000}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Which STEM majors have median salaries equal to or less than the
+  median for all majors' median earnings? Your output should only show
+  the major name and median, 25th percentile, and 75th percentile
+  earning for that major as and should be sorted such that the major
+  with the highest median earning is on top.
+\end{enumerate}
+
+🧶 ✅ ⬆️ Knit, \emph{commit, and push your changes to GitHub with an
+appropriate commit message. Make sure to commit and push all changed
+files so that your Git pane is cleared up afterwards.}
+
+\subsection{What types of majors do women tend to major
+in?}\label{what-types-of-majors-do-women-tend-to-major-in}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Create a scatterplot of median income vs.~proportion of women in that
+  major, coloured by whether the major is in a STEM field or not.
+  Describe the association between these three variables.
+\end{enumerate}
+
+\subsection{Further exploration}\label{further-exploration}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Ask a question of interest to you, and answer it using summary
+  statistic(s) and/or visualization(s).
+\end{enumerate}
+
+🧶 ✅ ⬆️ Knit, \emph{commit, and push your changes to GitHub with an
+appropriate commit message. Make sure to commit and push all changed
+files so that your Git pane is cleared up afterwards and review the md
+document on GitHub to make sure you're happy with the final state of
+your work.}
+
+Now go back through your write up to make sure you've answered all
+questions and all of your R chunks are properly labeled. Once you decide
+that you are done with the homework, choose the knit drop down and
+select \texttt{Knit\ to\ tufte\_handout} to generate a pdf. Download and
+submit that pdf to Canvas.
+
+\end{document}
